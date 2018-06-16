@@ -23,7 +23,7 @@ export const fetchCommodities = options => dispatch => {
 	const { socket } = options;
   delete options.socket;
   // https://www.quandl.com/api/v3/datasets/WIKI/FB/data.csv?api_key=YOURAPIKEYHERE
-  return fetch(`http://api.openweathermap.org/data/2.5/forecast?id=2331140&APPID=096c23b300607891a814fb3f6fa12325`)
+  return fetch(`http://api.openweathermap.org/data/2.5/forecast?id=&APPID=`)
     .then((response) => {
       
       
