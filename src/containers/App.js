@@ -11,7 +11,7 @@ class App extends Component {
     this.props.fetchCommodities({ socket: this.socket }); 
   }
   render() {
-    
+    console.log("this props", this.props);
     if (this.props.isFetching) {
       return <ReactLoading type="bars" />;
     } 
@@ -20,7 +20,17 @@ class App extends Component {
       <ul className="list-unstyle">
         {
           this.props.commodities.map(
-          dataset => <li key={dataset.data}>{dataset.data}</li>
+          (dataset, index) => <li key={index}>
+            <span>Time</span>: <span>{dataset.dt_txt}</span>
+            <br />
+            <span>Temperature</span>: <span>{dataset.main.temp}</span>
+            <br />
+            <span>Min Temperature</span>: <span>{dataset.main.temp_min}</span>
+            <br />
+            <span>Max Temperature</span>: <span>{dataset.main.temp_max}</span>
+            <br />
+            <span>Pressure</span>: <span>{dataset.main.pressure}</span>
+          </li>
         )}
         
       </ul>

@@ -7,10 +7,10 @@ export const GET_FAILURE_COMMODITIES = 'GET_FAILURE_COMMODITIES';
 export const getRequestCommodities = () => ({
   type: GET_REQUEST_COMMODITIES
 });
-export const getSuccessCommodities = (dataset, json) => {
+export const getSuccessCommodities = (dataset) => {
   return {
     type: GET_SUCCESS_COMMODITIES,
-    payload:{dataset:[]}
+    payload: dataset
   };
 };
 export const getFailureCommodities = err => ({
@@ -22,9 +22,18 @@ export const fetchCommodities = options => dispatch => {
 	dispatch(getRequestCommodities())
 	const { socket } = options;
   delete options.socket;
-  
-  return fetch(`https://www.quandl.com/api/v3/datasets/WIKI/FB.json?api_key=`)
-    .then(response => response.json())
-    .then(json => dispatch(getSuccessCommodities(options, json)))
+  // https://www.quandl.com/api/v3/datasets/WIKI/FB/data.csv?api_key=YOURAPIKEYHERE
+  return fetch(`http://api.openweathermap.org/data/2.5/forecast?id=2331140&APPID=096c23b300607891a814fb3f6fa12325`)
+    .then((response) => {
+      
+      
+      if (response.json) {
+        response.json().then((value) => {
+          console.log("response value", );
+          dispatch(getSuccessCommodities(value.list))
+        })
+        
+      }
+    })
     socket.emit(GET_SUCCESS_COMMODITIES, options);
 }

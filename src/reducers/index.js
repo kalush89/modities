@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import * as Actions from '../actions';
 
 const initialState = {
-  commodities: {},
+  commodities: [],
   isFetching: true, // Default to fetching..
   error: null
 };
@@ -17,11 +17,10 @@ export default (state = initialState, action) => {
     case Actions.GET_SUCCESS_COMMODITIES:
       return {
         ...state,
-        commodities: action.payload.results,
+        commodities: action.payload,
         isFetching: false
       };
     case Actions.GET_FAILURE_COMMODITIES:
-      console.log('Error: ', action.error);
       return {
         ...state,
         error: action.error,
